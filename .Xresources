@@ -1,0 +1,148 @@
+!############################################################################
+!
+! ooooo        ooooo ooooo      ooo ooooo     ooo ooooooo  ooooo 
+! `888'        `888' `888b.     `8' `888'     `8'  `8888    d8'  
+! 888          888   8 `88b.    8   888       8     Y888..8P    
+! 888          888   8   `88b.  8   888       8      `8888'     
+! 888          888   8     `88b.8   888       8     .8PY888.    
+! 888       o  888   8       `888   `88.    .8'    d8'  `888b   
+! o888ooooood8 o888o o8o        `8     `YbodP'    o888o  o88888o
+
+! ooooo      ooo   .oooooo.   ooo        ooooo       .o.       oooooooooo.   
+! `888b.     `8'  d8P'  `Y8b  `88.       .888'      .888.      `888'   `Y8b  
+! 8 `88b.    8  888      888  888b     d'888      .8"888.      888      888 
+! 8   `88b.  8  888      888  8 Y88. .P  888     .8' `888.     888      888 
+! 8     `88b.8  888      888  8  `888'   888    .88ooo8888.    888      888 
+! 8       `888  `88b    d88'  8    Y     888   .8'     `888.   888     d88' 
+! o8o        `8   `Y8bood8P'  o8o        o888o o88o     o8888o o888bood8P'   
+!
+!############################################################################
+
+! !!! COPY THIS FILE TO YOUR HOME FOLDER !!!
+
+! ~~~~~ References ~~~~~
+! 1. https://www.x.org/releases/X11R6.7.0/doc/xterm.1.html
+! 2. https://jlk.fjfi.cvut.cz/arch/manpages/man/xterm.1
+! 3. https://wiki.archlinux.org/index.php/Xterm
+! 4. http://www.futurile.net/2016/06/14/xterm-setup-and-truetype-font-configuration/
+! 5. http://www.futurile.net/2016/06/15/xterm-256color-themes-molokai-terminal-theme/
+! 6. https://unix.stackexchange.com/questions/216723/xterm-or-xterm-in-configuration-file
+! 7. https://github.com/gotbletu/shownotes/blob/master/xterm_xresources.md
+
+!~~~~~~~~~~ Syntax specifics and XTerm vs xterm ~~~~~~~~~~~
+! In general Class names begin with capital letter whereas 
+! Instance names begin with lowercase one.
+! Therefore XTerm and xterm describe the same application but the capital
+! one describes the class (all cases of instances) whereas the lowrcase 
+! a particular instance of the class.
+! Two of the available application classes are XTerm and UXTerm.
+! In practice (daily usage) we would like all xterm instances to launch with
+! the same properties and therefore we can set the properties of XTerm class
+! instead of xterm instance. That's why the XTerm is used below. 
+! X11 resources have a name which consists of a series of components 
+! separated by a dot or asterisk: 
+!    application.widget.property or application*widget.property
+! e.g. XTerm.vt100.geometry 
+! defines the geometry property of vt100 widget which belongs to XTerm class
+! the use of asterisk (*) wildcard as seperator makes the resource settings work 
+! for either the application or widget:
+! e.g. XTerm*vt100.geometry
+!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+! Save this file as .Xresources in your home directory !
+
+! ## Enable a color supported XTerm ##
+XTerm.termName: xterm-256color
+
+! ## Set xterm window size ##
+XTerm*VT100.geometry: 130x50
+
+! ## Set font and fontsize ##
+XTerm*faceName: DejaVu Sans Mono Regular
+XTerm*faceSize: 14
+
+! VT Font Menu: Unreadable
+XTerm*faceSize1: 8
+! VT Font Menu: Tiny
+XTerm*faceSize2: 10
+! VT Font Menu: Small
+XTerm*faceSize3: 12
+! VT Font Menu: Medium
+XTerm*faceSize4: 16
+! VT Font Menu: Large
+XTerm*faceSize5: 22
+! VT Font Menu: Huge
+XTerm*faceSize6: 24
+
+! ## Scrollbar ##
+XTerm*vt100.scrollBar: false
+
+! Do not scroll when there is new input
+XTerm*scrollTtyOutput: false
+
+! Scrolling by using Shift-PageUp / Shift-PageDown or mousewheel by default ##
+! Lines of output you can scroll back over
+XTerm*saveLines: 15000
+
+! Enable copy/paste hotkeyes (mouse highlight = copy ,  shift+Insert = paste)
+XTerm*selectToClipboard: true
+
+! ## Select text ##
+XTerm*highlightSelection: true
+! Remove trailing spaces
+XTerm*trimSelection: true
+
+! ## Keybindings ##
+XTerm*vt100.translations: #override \n\
+  Ctrl <Key>-: smaller-vt-font() \n\
+  Ctrl <Key>+: larger-vt-font() \n\
+  Ctrl <Key>0: set-vt-font(d) \n\
+  Ctrl Shift <Key>C: copy-selection(CLIPBOARD) \n\
+  Ctrl Shift <Key>V: insert-selection(CLIPBOARD)
+
+! ~~~~~~~~~~~~~~~~~~
+! ## Color Themes ## 
+! ~~~~~~~~~~~~~~~~~~
+!
+! based on snazzy color theme
+! https://github.com/olstenlarck/urxvt-xterm-snazzy/blob/7c34009a19ade65271e26ef065c678b0fa2abd0d/.Xdefaults
+!
+XTerm*title: XTerminal
+XTerm*background: #5e81ac
+XTerm*foreground: #030303
+
+! original #86a2b0
+XTerm*colorUL: #eff0eb
+XTerm*underlineColor: #eff0eb
+
+! ! black
+XTerm*color0  : #2E3436
+XTerm*color8  : #686868
+!
+! ! red
+XTerm*color1  : #ff5c57
+XTerm*color9  : #ff5c57
+!
+! ! green
+XTerm*color2  : #5af78e
+XTerm*color10 : #5af78e
+!
+! ! yellow
+XTerm*color3  : #f3f99d
+XTerm*color11 : #f3f99d
+!
+! ! blue
+XTerm*color4  : #57c7ff
+XTerm*color12 : #57c7ff
+!
+! ! magenta
+XTerm*color5  : #ff6ac1
+XTerm*color13 : #ff6ac1
+!
+! ! cyan
+XTerm*color6  : #9aedfe
+XTerm*color14 : #9aedfe
+!
+! ! white
+XTerm*color7  : #f1f1f0
+XTerm*color15 : #eff0eb
